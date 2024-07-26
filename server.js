@@ -2,10 +2,11 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
-const cors = require('cors');
+const cors = require('cors'); // Import the CORS package
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
+// Setup CORS middleware
 app.use(cors({
   origin: ["http://localhost:3001", "https://chat-client-virid.vercel.app"],
   methods: ["GET", "POST"],
@@ -13,6 +14,10 @@ app.use(cors({
 }));
 
 app.get('/', (req, res) => {
+  res.status(200).json('Welcome to the root of the application');
+});
+
+app.get('/home', (req, res) => {
   res.status(200).json('Welcome, your app is working well');
 });
 
@@ -21,8 +26,10 @@ const io = socketIo(server, {
   cors: {
     origin: ["http://localhost:3001", "https://chat-client-virid.vercel.app"],
     methods: ["GET", "POST"],
-    path: '/socket.io'
+    credentials: true
   },
+  transports: ['websocket', 'polling'], // Ensure both transports are enabled
+  path: '/socket.io' // Make sure the path is correctly set
 });
 
 io.on("connection", (socket) => {
