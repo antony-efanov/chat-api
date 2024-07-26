@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:3001",
+    origin: ["http://localhost:3001", "https://chat-client-virid.vercel.app"],
     methods: ["GET", "POST"],
   },
 });
