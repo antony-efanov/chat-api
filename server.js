@@ -4,11 +4,11 @@ const http = require('http');
 const socketIo = require('socket.io');
 const cors = require('cors'); // Import the CORS package
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 
 // Setup CORS middleware
 app.use(cors({
-  origin: ["http://localhost:3001", "https://chat-client-virid.vercel.app"],
+  origin: ["http://localhost:3001", "https://chat-client-khuc.onrender.com/"],
   methods: ["GET", "POST"],
   credentials: true
 }));
